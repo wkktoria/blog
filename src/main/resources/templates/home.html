@@ -12,6 +12,7 @@
 <div class="container-fluid">
     <div th:replace="fragments/header :: header">...</div>
     <main>
+        <p class="text-center"><a href="#" th:href="@{'/posts/new'}">New post</a></p>
         <div class="card w-75 mx-auto my-1" th:each="post : ${posts}">
             <div class="card-body">
                 <h5 class="card-title" th:text="${post.title}"></h5>
