@@ -22,15 +22,15 @@ public class SeedData implements CommandLineRunner {
         if (posts.isEmpty()) {
             Post post1 = new Post();
             post1.setTitle("Title of Post 1");
-            post1.setContent("Content of Post 1");
+            post1.setContent("Et officiis sunt id. Unde expedita assumenda sit amet omnis ipsa dicta voluptas.");
 
             Post post2 = new Post();
             post2.setTitle("Title of Post 2");
-            post2.setContent("Content of Post 2");
+            post2.setContent("Omnis et molestiae tenetur et fugiat est doloribus. Consectetur voluptas quia dolor voluptatum temporibus. Impedit est quas ex perspiciatis autem reprehenderit. Voluptate non quisquam magnam quia quidem ipsam nobis sint. Dolorem eligendi quo optio tenetur est corrupti debitis hic. Autem laboriosam fuga veniam consequatur quo aut consequatur dolores.");
 
             Post post3 = new Post();
             post3.setTitle("Title of Post 3");
-            post3.setContent("Content of Post 3");
+            post3.setContent("Omnis et molestiae tenetur et fugiat est doloribus. Consectetur voluptas quia dolor voluptatum temporibus. Impedit est quas ex perspiciatis autem reprehenderit. Voluptate non quisquam magnam quia quidem ipsam nobis sint. Dolorem eligendi quo optio tenetur est corrupti debitis hic. Autem laboriosam fuga veniam consequatur quo aut consequatur dolores.");
 
             postService.save(post1);
             postService.save(post2);
