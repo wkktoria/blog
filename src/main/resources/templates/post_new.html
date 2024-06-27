@@ -17,11 +17,11 @@
         <input th:field="*{createdAt}" type="hidden">
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
-            <input class="form-control" id="title" th:field="*{title}" type="text">
+            <input class="form-control" id="title" required th:field="*{title}" type="text">
         </div>
         <div class="mb-3">
             <label class="form-label" for="content">Content</label>
-            <textarea class="form-control" id="content" th:field="*{content}"></textarea>
+            <textarea class="form-control" id="content" required th:field="*{content}"></textarea>
         </div>
         <button class="btn btn-primary" type="submit">Publish post</button>
     </form>
