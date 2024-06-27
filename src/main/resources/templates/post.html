@@ -12,6 +12,7 @@
 <div class="container">
     <div>
         <h1 th:text="${post.title}"></h1>
+        <p th:text="'Written by ' + ${post.account.getUsername()}"></p>
         <p><small class="text-muted"
                   th:text="'Created at ' + ${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}"></small>
         <p>
