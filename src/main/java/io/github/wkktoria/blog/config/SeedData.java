@@ -39,17 +39,49 @@ public class SeedData implements CommandLineRunner {
 
             Post post1 = new Post();
             post1.setTitle("Title of Post 1");
-            post1.setContent("Et officiis sunt id. Unde expedita assumenda sit amet omnis ipsa dicta voluptas.");
+            post1.setContent("""       
+                    This is a first post.
+                                        
+                    Example of list:
+                    * list item 1
+                    * list item 2
+                    * list item 3
+                                        
+                    And an image of cat:
+                    ![Cat](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpixnio.com%2Ffree-images%2F2017%2F09%2F26%2F2017-09-26-07-47-55-550x825.jpg&f=1&nofb=1&ipt=432d5fdda32fc03478610aaa374a7325c855537adde8308464ad241a71c22cc4)                    
+                    """);
             post1.setAccount(account1);
 
             Post post2 = new Post();
             post2.setTitle("Title of Post 2");
-            post2.setContent("Omnis et molestiae tenetur et fugiat est doloribus. Consectetur voluptas quia dolor voluptatum temporibus. Impedit est quas ex perspiciatis autem reprehenderit. Voluptate non quisquam magnam quia quidem ipsam nobis sint. Dolorem eligendi quo optio tenetur est corrupti debitis hic. Autem laboriosam fuga veniam consequatur quo aut consequatur dolores.");
+            post2.setContent("""
+                    This is a second post.
+                                        
+                                        
+                    Examples of source code:
+                    ```js
+                    let greeting = 'Hello World';
+                    console.log(greeting);
+                    ```
+                                        
+                    ```python
+                    greeting = 'Hello World';
+                    print(greeting);
+                    ```
+                    """);
             post2.setAccount(account2);
 
             Post post3 = new Post();
             post3.setTitle("Title of Post 3");
-            post3.setContent("Omnis et molestiae tenetur et fugiat est doloribus. Consectetur voluptas quia dolor voluptatum temporibus. Impedit est quas ex perspiciatis autem reprehenderit. Voluptate non quisquam magnam quia quidem ipsam nobis sint. Dolorem eligendi quo optio tenetur est corrupti debitis hic. Autem laboriosam fuga veniam consequatur quo aut consequatur dolores.");
+            post3.setContent("""
+                    This is a third post.
+                                        
+                    Example of table:
+                    | Column 1      | Column 2      |
+                    | ------------- | ------------- |
+                    | Cell 1, Row 1 | Cell 2, Row 1 |
+                    | Cell 1, Row 2 | Cell 1, Row 2 |
+                    """);
             post3.setAccount(account2);
 
             postService.save(post1);
