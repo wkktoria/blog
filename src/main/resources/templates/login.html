@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="container-fluid">
+    <div th:replace="fragments/header :: header">...</div>
     <h1>Log in</h1>
     <form action="#" method="post" th:action="@{/login}">
         <div class="mb-3">
