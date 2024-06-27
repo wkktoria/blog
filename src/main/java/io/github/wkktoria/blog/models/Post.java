@@ -1,6 +1,7 @@
 package io.github.wkktoria.blog.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +18,8 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String content;
     private LocalDateTime createdAt;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
+    private Account account;
 }
