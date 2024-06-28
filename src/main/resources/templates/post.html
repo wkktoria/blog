@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -18,7 +18,15 @@
         <p><small class="text-muted"
                   th:text="'Created at ' + ${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}"></small>
         </p>
+        <p><small class="text-muted"
+                  th:text="'Last updated at ' + ${#temporals.format(post.updatedAt, 'dd-MM-yyyy HH:mm')}"></small>
+        </p>
         <md-block th:text="${post.content}"></md-block>
+        <div sec:authorize="isAuthenticated()">
+            <span class="text-center"><a class="btn btn-primary" href="#" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a></span>
+            <span class="text-center" sec:authorize="hasAuthority('ROLE_ADMIN')"><a class="btn btn-primary" href="#"
+                                                                                    th:href="@{'/posts/' + ${post.id} + '/delete'}">Delete</a></span>
+        </div>
     </div>
     <p class="mt-3">Back to <a class="" href="#" th:href="@{'/'}">homepage</a>.</p>
     <div th:replace="fragments/footer :: footer">...</div>

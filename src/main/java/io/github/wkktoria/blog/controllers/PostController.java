@@ -4,6 +4,7 @@ import io.github.wkktoria.blog.models.Account;
 import io.github.wkktoria.blog.models.Post;
 import io.github.wkktoria.blog.services.AccountService;
 import io.github.wkktoria.blog.services.PostService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -37,22 +39,82 @@ public class PostController {
     }
 
     @GetMapping("/posts/new")
+    @PreAuthorize("isAuthenticated()")
     public String createNewPost(Model model) {
-        Optional<Account> optionalAccount = accountService.findByEmail("user@domain.com");
+        Post post = new Post();
+        model.addAttribute("post", post);
+        return "post_new";
+    }
 
-        if (optionalAccount.isPresent()) {
-            Post post = new Post();
-            post.setAccount(optionalAccount.get());
-            model.addAttribute("post", post);
-            return "post_new";
+    @PostMapping("/posts/new")
+    @PreAuthorize("isAuthenticated()")
+    public String saveNewPost(@ModelAttribute Post post, Principal principal) {
+        String authUsername = "anonymous";
+
+        if (principal != null) {
+            authUsername = principal.getName();
+        }
+
+        Account account = accountService.findByEmail(authUsername).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+        post.setAccount(account);
+
+        postService.save(post);
+        return "redirect:/posts/" + post.getId();
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    @PreAuthorize("isAuthenticated()")
+    public String getPostForEdit(@PathVariable Long id, Model model, Principal principal) {
+        String authUsername = "anonymous";
+
+        if (principal != null) {
+            authUsername = principal.getName();
+        }
+
+        Optional<Post> optionalPost = postService.getById(id);
+
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+
+            if (post.getAccount().getEmail().equalsIgnoreCase(authUsername) || authUsername.equalsIgnoreCase("admin@blog.com")) {
+                model.addAttribute("post", post);
+                return "post_edit";
+            } else {
+                return "403";
+            }
         } else {
             return "404";
         }
     }
 
-    @PostMapping("/posts/new")
-    public String saveNewPost(@ModelAttribute Post post) {
-        postService.save(post);
-        return "redirect:/posts/" + post.getId();
+    @PostMapping("/posts/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String updatePost(@PathVariable Long id, Post post) {
+        Optional<Post> optionalPost = postService.getById(id);
+
+        if (optionalPost.isPresent()) {
+            Post existingPost = optionalPost.get();
+
+            existingPost.setTitle(post.getTitle());
+            existingPost.setContent(post.getContent());
+
+            postService.save(existingPost);
+        }
+
+        return "redirect:/posts/" + id;
+    }
+
+    @GetMapping("/posts/{id}/delete")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String deletePost(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.getById(id);
+
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            postService.delete(post);
+            return "redirect:/";
+        } else {
+            return "404";
+        }
     }
 }
