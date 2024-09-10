@@ -10,9 +10,9 @@
 </head>
 <body>
 <header class="mb-3">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" sec:authorize="!isAuthenticated()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" th:href="@{'/'}">Blog</a>
+            <a class="navbar-brand" href="/">Blog</a>
             <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                     class="navbar-toggler" data-bs-target="#navbarSupportedContent"
                     data-bs-toggle="collapse" type="button">
@@ -21,22 +21,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link" href="/">Posts</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
                         <a class="nav-link" href="#" th:href="@{'/login'}">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
                         <a class="nav-link" href="#" th:href="@{'/register'}">Register</a>
                     </li>
                 </ul>
+                <form action="#" class="d-flex" method="post" sec:authorize="isAuthenticated()"
+                      th:action="@{/logout}">
+                    <p class="fw-light my-auto me-2">You are logged as: <span
+                            sec:authentication="name"></span>
+                    </p>
+                    <button class="btn btn-outline-danger" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </nav>
-    <div class="text-center my-2">
-        <form action="#" method="post" sec:authorize="isAuthenticated()" th:action="@{/logout}">
-            <h1>Hi, <span sec:authentication="name"></span>
-                <button class="btn btn-primary" type="submit">Logout</button>
-            </h1>
-        </form>
-    </div>
 </header>
 <script crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
