@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div th:replace="fragments/header :: header">...</div>
+    <div th:replace="~{fragments/header :: header}">...</div>
     <h1>Log in</h1>
     <form action="#" method="post" th:action="@{/login}">
         <p class="text-danger" th:if="${param.error != null}">Wrong email address or password.</p>
@@ -25,7 +25,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Login</button>
     </form>
-    <div th:replace="fragments/footer :: footer">...</div>
+    <div th:replace="~{fragments/footer :: footer}">...</div>
 </div>
 <script crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

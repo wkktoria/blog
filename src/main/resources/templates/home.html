@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div th:replace="fragments/header :: header">...</div>
+    <div th:replace="~{fragments/header :: header}">...</div>
     <main>
         <p class="text-center"><a href="#" th:href="@{'/posts/new'}">New post</a></p>
         <div class="card w-75 mx-auto my-1" th:each="post : ${posts}">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </main>
-    <div th:replace="fragments/footer :: footer">...</div>
+    <div th:replace="~{fragments/footer :: footer}">...</div>
 </div>
 <script crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

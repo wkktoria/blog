@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div th:replace="fragments/header :: header">...</div>
+    <div th:replace="~{fragments/header :: header}">...</div>
     <h1>Update post</h1>
     <form action="#" method="post" th:action="@{'/posts/{id}'(id=${post.id})}" th:object="${post}">
         <input th:field="*{createdAt}" type="hidden">
@@ -24,7 +24,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Update</button>
     </form>
-    <div th:replace="fragments/footer :: footer">...</div>
+    <div th:replace="~{fragments/footer :: footer}">...</div>
 </div>
 <script crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
