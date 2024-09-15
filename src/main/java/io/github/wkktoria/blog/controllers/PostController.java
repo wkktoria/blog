@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -76,7 +77,7 @@ public class PostController {
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
 
-            if (post.getAccount().getEmail().equalsIgnoreCase(authUsername) || authUsername.equalsIgnoreCase("admin@blog.com")) {
+            if (post.getAccount().getEmail().equalsIgnoreCase(authUsername) || Objects.requireNonNull(principal).toString().contains("ROLE_ADMIN")) {
                 model.addAttribute("post", post);
                 return "post_edit";
             } else {
